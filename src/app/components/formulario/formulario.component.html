@@ -1,0 +1,29 @@
+<form
+  class="d-flex flex-column"
+  [formGroup]="formulario"
+  (ngSubmit)="submit($event)">
+
+  <div class="mb-3">
+    <span [ngClass]="{'text-danger': formulario.get('nombre')?.invalid}"> Nombre: * </span>
+    <input type="text" formControlName="nombre" required>
+    <span *ngIf="this.formulario.get('nombre')?.errors?.['required']">        (El nombre no puede quedar vacío)</span>
+  </div>
+
+  <div class="mb-3">
+    <span [ngClass]="{'text-danger': formulario.get('edad')?.invalid}"> Edad: * </span>
+    <input type="number" formControlName="edad">
+    <span *ngIf="this.formulario.get('edad')?.errors?.['required']">(La edad no puede quedar vacía)</span>
+    <span *ngIf="this.formulario.get('edad')?.errors?.['min']">(Tiene que ser mayor de edad)</span>
+  </div>
+
+  <div class="mb-3">
+    <span [ngClass]="{'text-danger': formulario.get('email')?.invalid}"> Email: * </span>
+    <input type="email" formControlName="email">
+    <span *ngIf="this.formulario.get('email')?.errors?.['required']">(El mail no puede quedar vacío)</span>
+  </div>
+
+  <div class="mb-3">
+    <button type="submit" class="btn" [ngClass]="formulario.invalid ? 'btn-primary disabled' : 'btn-primary'"> Confirmar</button>
+  </div>
+
+</form>
